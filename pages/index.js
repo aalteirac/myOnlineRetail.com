@@ -21,7 +21,7 @@ function AppContent({ Component, pageProps,isConnected, products,filtered,count}
   setProducts(products);
   setFiltered(filtered);
   if(filtered.length){
-    products=filtered.filtered;
+    products=filtered;
   }
 
   return (
