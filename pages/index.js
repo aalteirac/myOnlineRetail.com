@@ -18,12 +18,11 @@ function AppContent({ Component, pageProps,isConnected, products,filtered,count}
   const { setFiltered } = useGlobal();  
   const { setCount} = useGlobal();
   setCount(count)
-  setProducts(products);
-  setFiltered(filtered);
-  if(filtered.length){
+  if(filtered.length>0){
     products=filtered;
   }
-
+  setProducts(products);
+  setFiltered(filtered);
   return (
     <>
       {isConnected && (
@@ -72,7 +71,8 @@ export async function getServerSideProps(context) {
   isConnected = true;
   const db = client.db("store");
   const collection = db.collection("products");
-  if(search!=''){
+  const count = await collection.countDocuments();
+  if(search!='' && search.length>2){
     try {
       let p= await collection.aggregate(
         [
@@ -93,7 +93,7 @@ export async function getServerSideProps(context) {
           isConnected,
           products: [],
           filtered: JSON.parse(JSON.stringify(p)),
-
+          count:JSON.parse(JSON.stringify(p)).length
         },
         
       }
@@ -103,8 +103,6 @@ export async function getServerSideProps(context) {
   }
   else
     try {
-      console.log("skipped",page*12)
-      const count = await collection.countDocuments();
       const products = await collection.find({}).limit(12).skip(page*12).toArray();
       return {
         props: { 

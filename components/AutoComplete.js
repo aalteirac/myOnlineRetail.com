@@ -23,7 +23,7 @@ const Autocomplete = () => {
       const filteredResults = filtered.map((it) =>{
         return it.name
       });
-      setResults(filteredResults);
+      // setResults(filteredResults);
     }
     else{
       setResults([]);

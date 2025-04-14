@@ -52,15 +52,6 @@ const Header = () => {
               <div className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
                 <Link href="/">Home</Link>
               </div>
-              <div className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
-                <Link href="/products">Shop</Link>
-              </div>
-              <a
-                className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-                href="#"
-              >
-                Categories
-              </a>
               <a
                 className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
                 href="#"
