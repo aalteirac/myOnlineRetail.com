@@ -12,7 +12,10 @@ import { useGlobal } from '../context/GlobalContext';
 
 
 import "tailwindcss/tailwind.css";
+function json(el){
+  return JSON.parse(JSON.stringify(el))
 
+}
 function AppContent({ Component, pageProps,isConnected, products,filtered,count}) {
   const { setProducts } = useGlobal();  
   const { setFiltered } = useGlobal();  
@@ -74,7 +77,7 @@ export async function getServerSideProps(context) {
   const count = await collection.countDocuments();
   if(search!='' && search.length>2){
     try {
-      let p= await collection.aggregate(
+      let results= await collection.aggregate(
         [
           {
             $search: {
@@ -92,8 +95,8 @@ export async function getServerSideProps(context) {
         props: { 
           isConnected,
           products: [],
-          filtered: JSON.parse(JSON.stringify(p)),
-          count:JSON.parse(JSON.stringify(p)).length
+          filtered: json(results),
+          count:json(results).length
         },
         
       }
@@ -107,7 +110,7 @@ export async function getServerSideProps(context) {
       return {
         props: { 
           isConnected,
-          products: JSON.parse(JSON.stringify(products)),
+          products: json(products),
           filtered: [],
           count:count
         },

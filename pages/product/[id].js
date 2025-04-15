@@ -33,13 +33,15 @@ export async function getServerSideProps(context) {
 const ProductDetail = ({ product }) => {
   return (
     <div className="md:flex md:items-center">
-      <div className="w-full h-64 md:w-1/2 lg:h-96 relative">
+      <div className="w-full h-screen relative">
         <Image
           src={product.image}
           alt={product.name}
           fill={true}
+          // width={750}
+          // height={750}
           objectFit="cover"
-          className="absolute z-0 rounded"
+          className="rounded"
         />
       </div>
       <div className="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
